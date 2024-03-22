@@ -1,0 +1,35 @@
+name: Accelo Integration
+
+unique_key: accelo  
+
+docs:
+  description: Integrates with Accelo for data exchange
+
+description: Accelo is a project management tool that helps businesses manage projects, teams, and clients. This integration allows you to connect your application with Accelo to exchange data.
+
+logo: 
+
+categories: [crm] 
+
+auth_schemes:
+  # OAuth2 scheme
+  - scheme_name: Accelo OAuth2
+    auth_mode: OAuth2
+    authorization_url: https://api.accelo.com/oauth/authorize
+    token_url: https://api.accelo.com/oauth/token
+    default_scopes: ["read", "write"]  # You can modify the scopes based on your needs
+    scope_separator: ','
+    token_response_metadata: [access_token, token_type, scope, expires_in, refresh_token]
+    token_access_request_method: POST
+    authorization_params:
+      response_type: code
+    token_params:
+      grant_type: authorization_code
+    proxy:
+      base_url: "{{base_url}}"
+    fields:
+      - name: base_url
+        displayName: Accelo Base URL
+        description: Base URL of your Accelo instance (e.g., https://your-company.accelo.com)
+        type: string
+        default: ""
